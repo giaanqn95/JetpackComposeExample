@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TestAndroidCompose</string>
+    <string name="title_activity_login_screen">My Compose App</string>
+</resources>
