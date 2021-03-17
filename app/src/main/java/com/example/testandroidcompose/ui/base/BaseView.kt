@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.testandroidcompose.ui.AoenTypography
+import com.example.testandroidcompose.ui.ui_test.fadeIn
 
 @Composable
 fun AoenButtonText(text: String, clickable: (() -> Unit)) {
@@ -24,7 +25,7 @@ fun AoenButtonText(text: String, clickable: (() -> Unit)) {
             .border(
                 BorderStroke(width = 2.dp, color = Color.White),
                 RoundedCornerShape(10.dp)
-            )
+            ).fadeIn()
     ) {
         val (tv) = createRefs()
         Text(

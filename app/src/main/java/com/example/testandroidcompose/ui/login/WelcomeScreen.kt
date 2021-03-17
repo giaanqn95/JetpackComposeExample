@@ -18,6 +18,7 @@ import com.example.testandroidcompose.ui.AoenColors
 import com.example.testandroidcompose.ui.AoenTypography
 import com.example.testandroidcompose.ui.TestAndroidComposeTheme
 import com.example.testandroidcompose.ui.base.AoenButtonText
+import com.example.testandroidcompose.ui.ui_test.fadeIn
 
 @Composable
 fun WelcomeScreen(modifier: Modifier) {
@@ -30,7 +31,7 @@ fun WelcomeScreen(modifier: Modifier) {
 @Composable
 fun HeaderImage(modifier: Modifier) {
 //    modifier.preferredHeight(50.dp)
-    ConstraintLayout(modifier = modifier.fillMaxWidth().padding(top = 20.dp)) {
+    ConstraintLayout(modifier = modifier.fillMaxWidth().padding(top = 20.dp).fadeIn()) {
         val (logo, logoMember) = createRefs()
         Image(
             bitmap = imageResource(id = R.drawable.logo_white),
@@ -83,7 +84,7 @@ fun SelectFlow(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(10.dp))
         Card(
             backgroundColor = AoenColors.primary,
-            modifier = Modifier.fillMaxWidth(), elevation = 5.dp
+            modifier = Modifier.fillMaxWidth().fadeIn(), elevation = 5.dp
         ) {
             Column(modifier = modifier.padding(10.dp)) {
                 AoenButtonText("Đăng nhập") {

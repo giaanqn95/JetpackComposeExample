@@ -15,7 +15,9 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -556,4 +558,53 @@ fun animateContentSize() {
             style = AoenTypography.button.copy(color = Color.White)
         )
     }
+}
+
+@Composable
+fun InfiniteAnimationDemo() {
+    // Create a mutable state for alpha, and update it in the animation.
+    val alpha = remember { mutableStateOf(1f) }
+    LaunchedEffect(Unit) {
+        // Animate from 1f to 0f using an infinitely repeating animation
+        animate(
+            initialValue = 1f,
+            targetValue = 0f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(1000),
+                repeatMode = RepeatMode.Reverse
+            )
+        ) { value, /* velocity */ _ ->
+            // Update alpha mutable state with the current animation value
+            alpha.value = value
+        }
+    }
+    Box(Modifier.fillMaxSize()) {
+        Image(
+            Icons.Filled.Favorite,
+            modifier = Modifier.align(Alignment.Center)
+                .graphicsLayer(
+                    scaleX = 3.0f,
+                    scaleY = 3.0f,
+                    alpha = alpha.value
+                ),
+        )
+    }
+}
+
+fun Modifier.fadeIn(): Modifier = composed {
+    // Creates an `Animatable` and remembers it.
+    val alphaAnimation = remember { Animatable(0f) }
+    // Launches a coroutine for the animation when entering the composition.
+    // Uses `alphaAnimation` as the subject so the job in `LaunchedEffect` will run only when
+    // `alphaAnimation` is created, which happens one time when the modifier enters
+    // composition.
+    LaunchedEffect(alphaAnimation) {
+        // Animates to 1f from 0f for the fade-in, and uses a 500ms tween animation.
+        alphaAnimation.animateTo(
+            targetValue = 1f,
+            // Default animationSpec uses [spring] animation, here we overwrite the default.
+            animationSpec = tween(1000)
+        )
+    }
+    this.graphicsLayer(alpha = alphaAnimation.value)
 }
