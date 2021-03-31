@@ -28,9 +28,6 @@ class TodoViewModel : ViewModel() {
     var todoItems by mutableStateOf(listOf<TodoItem>())
         private set
 
-    // TODO (b/163069767): mutableStateListOf crashes LazyColumnFor when removing items
-    // val todoItems = mutableStateListOf<TodoItem>()
-
     val currentEditItem: TodoItem?
         get() = todoItems.getOrNull(currentEditPosition)
 

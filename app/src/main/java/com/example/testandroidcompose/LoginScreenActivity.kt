@@ -46,11 +46,11 @@ class LoginScreenActivity : AppCompatActivity() {
 //                TestCanvas()
 //                demoLayout()
 //                TestWithFragment(supportFragmentManager)
-                CustomViewWithAndroidView(supportFragmentManager = supportFragmentManager)
-                BackHandler(
-                    enabled = true,
-                    backDispatcher = this.onBackPressedDispatcher,
-                    onBack = { Toast.makeText(this, "asdasd", Toast.LENGTH_SHORT).show() })
+//                BackHandler(
+//                    enabled = true,
+//                    backDispatcher = this.onBackPressedDispatcher,
+//                    onBack = { Toast.makeText(this, "asdasd", Toast.LENGTH_SHORT).show() })
+                MyCustomLayout()
             }
         }
     }
@@ -69,8 +69,6 @@ class LoginScreenActivity : AppCompatActivity() {
             attrib.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         }
-//        setDisplayCutout()
-//        getStatusBarHeight(this)
     }
 }
 
@@ -149,10 +147,8 @@ fun BackHandler(
     backDispatcher: OnBackPressedDispatcher,
     onBack: () -> Unit
 ) {
-
     // Safely update the current `onBack` lambda when a new one is provided
     val currentOnBack by rememberUpdatedState(onBack)
-
     // Remember in Composition a back callback that calls the `onBack` lambda
     val backCallback = remember {
         // Always intercept back events. See the SideEffect for a more complete version
